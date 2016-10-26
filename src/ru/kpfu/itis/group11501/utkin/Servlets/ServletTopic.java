@@ -4,7 +4,12 @@ import ru.kpfu.itis.group11501.utkin.Helpers.TemplateHelper;
 import ru.kpfu.itis.group11501.utkin.Models.Comment;
 import ru.kpfu.itis.group11501.utkin.Models.Topic;
 import ru.kpfu.itis.group11501.utkin.Models.User;
-import ru.kpfu.itis.group11501.utkin.Services.*;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.CommentServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.TopicServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.UserServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.CommentService;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.TopicService;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +30,8 @@ public class ServletTopic extends HttpServlet {
     CommentService commentService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String text = request.getParameter("newComment");
         User user = (User)request.getSession().getAttribute("current_user");
         String[] strings = request.getRequestURI().split("/");
@@ -32,13 +39,13 @@ public class ServletTopic extends HttpServlet {
         Comment comment = new Comment(user,text, topic);
         commentService = new CommentServiceImpl();
         commentService.addCommentToTopic(comment);
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=utf-8");
         response.sendRedirect(request.getRequestURI());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         userService = new UserServiceImpl();
         topicService = new TopicServiceImpl();
         commentService = new CommentServiceImpl();

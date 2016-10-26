@@ -24,5 +24,20 @@ public class AddPhoto {
 
         out.close();
         filecontent.close();
+        /*
+        File fileOut = new File("D:/mafiasite/mafiasite/out/artifacts/mafiasite_war_exploded/images/" + fileName);
+        fileOut.createNewFile();
+        FileOutputStream out2 = new FileOutputStream(file);
+        InputStream filecontent2 = filePart.getInputStream();
+        int read2;
+        final byte[] bytes2 = new byte[1024];
+
+        while ((read2 = filecontent2.read(bytes2)) != -1) {
+            out2.write(bytes2, 0, read2);
+        }
+
+        out2.close();
+        filecontent2.close();
+        */
     }
 }

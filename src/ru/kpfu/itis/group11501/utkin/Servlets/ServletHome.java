@@ -2,10 +2,11 @@ package ru.kpfu.itis.group11501.utkin.Servlets;
 
 import ru.kpfu.itis.group11501.utkin.Helpers.TemplateHelper;
 import ru.kpfu.itis.group11501.utkin.Models.Feed;
-import ru.kpfu.itis.group11501.utkin.Services.FeedService;
-import ru.kpfu.itis.group11501.utkin.Services.FeedServiceImpl;
-import ru.kpfu.itis.group11501.utkin.Services.UserService;
-import ru.kpfu.itis.group11501.utkin.Services.UserServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Models.User;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.FeedService;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.FeedServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.UserService;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

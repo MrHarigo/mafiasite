@@ -1,8 +1,16 @@
-package ru.kpfu.itis.group11501.utkin.Dao;
+package ru.kpfu.itis.group11501.utkin.Dao.Implementations;
 
 import ru.kpfu.itis.group11501.utkin.Configs.JDBConnection;
+import ru.kpfu.itis.group11501.utkin.Dao.Interfaces.CommentDao;
 import ru.kpfu.itis.group11501.utkin.Models.*;
-import ru.kpfu.itis.group11501.utkin.Services.*;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.FeedServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.GameServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.TopicServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.UserServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.FeedService;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.GameService;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.TopicService;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.UserService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +22,9 @@ import java.util.ArrayList;
 public class CommentDaoImpl implements CommentDao {
 
     UserService userService;
+    FeedService feedService;
+    TopicService topicService;
+    GameService gameService;
 
     @Override
     public ArrayList<Comment> getCommentsForGame(Game game) {
@@ -144,6 +155,43 @@ public class CommentDaoImpl implements CommentDao {
             }
         }
 
+    }
+
+    @Override
+    public ArrayList<Comment> getAllComments() {
+        if (JDBConnection.getInstance().getConnection()!= null) {
+            String request = "SELECT * FROM comments order by comments.id desc";
+            try {
+                JDBConnection.statement = JDBConnection.getInstance().getConnection().prepareStatement(request);
+                ResultSet resultSet = JDBConnection.statement.executeQuery();
+                ArrayList<Comment> comments = new ArrayList<>();
+                while (resultSet.next()) {
+                    userService = new UserServiceImpl();
+                    userService = new UserServiceImpl();
+                    feedService = new FeedServiceImpl();
+                    gameService = new GameServiceImpl();
+                    topicService = new TopicServiceImpl();
+                    User specialUser = userService.find(resultSet.getString("author"));
+                    Feed feed = null;
+                    Topic topic = null;
+                    Game game = null;
+                    if (resultSet.getInt("feed") > 0) {
+                        feed = feedService.findFeed(resultSet.getInt("feed"));
+                    }
+                    if (resultSet.getInt("topic") > 0) {
+                        topic = topicService.findTopic(resultSet.getInt("topic"));
+                    }
+                    if (resultSet.getInt("game") > 0) {
+                        game = gameService.findGame(resultSet.getInt("game"));
+                    }
+                    comments.add(new Comment(resultSet.getInt("id"),specialUser,feed, resultSet.getString("text"), game, topic));
+                }
+                return comments;
+            } catch (SQLException sql) {
+                sql.printStackTrace();
+            }
+        }
+        return null;
     }
 
 

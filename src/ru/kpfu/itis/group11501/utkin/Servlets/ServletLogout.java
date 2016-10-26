@@ -1,7 +1,7 @@
 package ru.kpfu.itis.group11501.utkin.Servlets;
 
-import ru.kpfu.itis.group11501.utkin.Services.TokenService;
-import ru.kpfu.itis.group11501.utkin.Services.TokenServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.TokenService;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.TokenServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;

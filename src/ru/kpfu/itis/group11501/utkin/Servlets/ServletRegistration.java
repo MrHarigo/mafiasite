@@ -1,7 +1,7 @@
 package ru.kpfu.itis.group11501.utkin.Servlets;
 
 import ru.kpfu.itis.group11501.utkin.Helpers.TemplateHelper;
-import ru.kpfu.itis.group11501.utkin.Services.UserServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

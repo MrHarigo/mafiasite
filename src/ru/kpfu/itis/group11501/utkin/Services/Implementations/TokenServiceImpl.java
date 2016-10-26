@@ -1,7 +1,8 @@
-package ru.kpfu.itis.group11501.utkin.Services;
+package ru.kpfu.itis.group11501.utkin.Services.Implementations;
 
-import ru.kpfu.itis.group11501.utkin.Dao.TokenDao;
-import ru.kpfu.itis.group11501.utkin.Dao.TokenDaoImpl;
+import ru.kpfu.itis.group11501.utkin.Dao.Interfaces.TokenDao;
+import ru.kpfu.itis.group11501.utkin.Dao.Implementations.TokenDaoImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.TokenService;
 
 /**
  * Created by user on 25.10.2016.

@@ -1,6 +1,7 @@
 package ru.kpfu.itis.group11501.utkin.Filters;
 
 import ru.kpfu.itis.group11501.utkin.Helpers.CookieToSession;
+import ru.kpfu.itis.group11501.utkin.Models.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,6 @@ public class FilterUser implements Filter {
             }
         } else
             chain.doFilter(req, resp);
-
     }
 
     public void init(FilterConfig config) throws ServletException {

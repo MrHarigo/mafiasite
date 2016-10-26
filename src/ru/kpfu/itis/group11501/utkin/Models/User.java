@@ -23,6 +23,8 @@ public class User {
     private int games_lost_as_civilian;
     private int games_won_as_mafia;
     private int games_lost_as_mafia;
+    private boolean is_admin;
+    private boolean is_at_evening;
 
 
     public User(String nickname, String password, int experience) {
@@ -46,7 +48,8 @@ public class User {
     public User(String nickname, String password, String photo, int experience, int games_played,
                 int games_won, int games_lost, int games_won_as_red, int games_lost_as_red, int games_won_as_black,
                 int games_lost_as_black, int games_won_as_don, int games_lost_as_don, int games_won_as_sheriff,
-                int games_lost_as_sheriff, int games_won_as_civilian, int games_lost_as_civilian, int games_won_as_mafia, int games_lost_as_mafia) {
+                int games_lost_as_sheriff, int games_won_as_civilian, int games_lost_as_civilian, int games_won_as_mafia,
+                int games_lost_as_mafia, boolean is_admin, boolean is_at_evening) {
         this.nickname = nickname;
         this.password = password;
         this.photo = photo;
@@ -66,6 +69,24 @@ public class User {
         this.games_lost_as_civilian = games_lost_as_civilian;
         this.games_won_as_mafia = games_won_as_mafia;
         this.games_lost_as_mafia = games_lost_as_mafia;
+        this.is_admin = is_admin;
+        this.is_at_evening = is_at_evening;
+    }
+
+    public boolean is_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(boolean is_admin) {
+        this.is_admin = is_admin;
+    }
+
+    public boolean is_at_evening() {
+        return is_at_evening;
+    }
+
+    public void setIs_at_evening(boolean is_at_evening) {
+        this.is_at_evening = is_at_evening;
     }
 
     public String getNickname() {

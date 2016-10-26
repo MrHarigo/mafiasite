@@ -1,6 +1,7 @@
-package ru.kpfu.itis.group11501.utkin.Dao;
+package ru.kpfu.itis.group11501.utkin.Dao.Implementations;
 
 import ru.kpfu.itis.group11501.utkin.Configs.JDBConnection;
+import ru.kpfu.itis.group11501.utkin.Dao.Interfaces.TokenDao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

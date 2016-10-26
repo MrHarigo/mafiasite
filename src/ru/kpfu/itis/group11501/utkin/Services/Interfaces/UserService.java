@@ -1,4 +1,4 @@
-package ru.kpfu.itis.group11501.utkin.Services;
+package ru.kpfu.itis.group11501.utkin.Services.Interfaces;
 
 import ru.kpfu.itis.group11501.utkin.Models.User;
 
@@ -16,4 +16,9 @@ public interface UserService {
     void updateStatistics(String civilian_1, String civilian_2, String ivilian_3, String civilian_4,
                           String civilian_5, String civilian_6, String afia_1, String mafia_2,
                           String don, String sheriff, String winner_team);
+    ArrayList<User> sortUsers(String parameter, ArrayList<User> users);
+    void addUserToNextMafia(User user);
+    ArrayList<User> getUsersForNextMafia();
+    ArrayList<User> searchUsersLike(String pattern);
+    void updateUserInfo(String oldNickname, String newNickname, String password, int experience);
 }

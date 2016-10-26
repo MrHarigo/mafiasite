@@ -1,12 +1,11 @@
 package ru.kpfu.itis.group11501.utkin.Servlets;
 
-import ru.kpfu.itis.group11501.utkin.Errors.Error;
 import ru.kpfu.itis.group11501.utkin.Helpers.TemplateHelper;
 import ru.kpfu.itis.group11501.utkin.Models.User;
-import ru.kpfu.itis.group11501.utkin.Services.TokenService;
-import ru.kpfu.itis.group11501.utkin.Services.TokenServiceImpl;
-import ru.kpfu.itis.group11501.utkin.Services.UserService;
-import ru.kpfu.itis.group11501.utkin.Services.UserServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.TokenService;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.TokenServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.UserService;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.UserServiceImpl;
 import ru.kpfu.itis.group11501.utkin.Utils.Hash;
 import ru.kpfu.itis.group11501.utkin.Utils.Token;
 
@@ -22,9 +21,6 @@ import java.util.Map;
  */
 public class ServletLogin extends HttpServlet {
 
-    HttpSession session;
-    RequestDispatcher requestDispatcher;
-    Cookie cookie;
     UserService userService;
     TokenService tokenService;
 
@@ -44,6 +40,7 @@ public class ServletLogin extends HttpServlet {
         String login = req.getParameter("nickname").toLowerCase();
         String rememberMe = req.getParameter("rememberMe");
         String password = req.getParameter("password");
+        String language = req.getParameter("language");
         userService = new UserServiceImpl();
         User currentUser = userService.find(login);
 
@@ -59,12 +56,15 @@ public class ServletLogin extends HttpServlet {
                     tokenService = new TokenServiceImpl();
                     tokenService.addToken("" + currentUser.getNickname(), token);
                 }
+                Cookie cookie = new Cookie("language", language);
+                cookie.setMaxAge(30 * 24 * 60 * 60);
+                resp.addCookie(cookie);
                 resp.sendRedirect("/home");
             } else {
-                resp.sendRedirect("/login?err=wrong password!&login=" + login);
+                resp.sendRedirect("/login?err=wrong password!&login=" + login + "&language=" + language);
             }
         } else {
-            resp.sendRedirect("/login?err=wrong login!&login=" + login);
+            resp.sendRedirect("/login?err=wrong login!&login=" + login + "&language=" + language);
         }
     }
 }

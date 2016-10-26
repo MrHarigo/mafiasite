@@ -1,9 +1,10 @@
-package ru.kpfu.itis.group11501.utkin.Services;
+package ru.kpfu.itis.group11501.utkin.Services.Implementations;
 
-import ru.kpfu.itis.group11501.utkin.Dao.CommentDao;
-import ru.kpfu.itis.group11501.utkin.Dao.CommentDaoImpl;
+import ru.kpfu.itis.group11501.utkin.Dao.Interfaces.CommentDao;
+import ru.kpfu.itis.group11501.utkin.Dao.Implementations.CommentDaoImpl;
 import ru.kpfu.itis.group11501.utkin.Errors.Error;
 import ru.kpfu.itis.group11501.utkin.Models.*;
+import ru.kpfu.itis.group11501.utkin.Services.Interfaces.CommentService;
 
 import java.util.ArrayList;
 
@@ -62,5 +63,13 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void addCommentToTopic(Comment comment) {
         commentDao.addCommentToTopic(comment);
+    }
+
+    @Override
+    public ArrayList<Comment> getAllComments() {
+        if (commentDao.getAllComments() != null) {
+            return commentDao.getAllComments();
+        }
+        return null;
     }
 }

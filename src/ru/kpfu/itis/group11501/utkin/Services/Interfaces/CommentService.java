@@ -1,4 +1,4 @@
-package ru.kpfu.itis.group11501.utkin.Services;
+package ru.kpfu.itis.group11501.utkin.Services.Interfaces;
 
 import ru.kpfu.itis.group11501.utkin.Models.*;
 
@@ -14,4 +14,5 @@ public interface CommentService {
     void addCommentToGame(Comment comment);
     void addCommentToFeed(Comment comment);
     void addCommentToTopic(Comment comment);
+    ArrayList<Comment> getAllComments();
 }

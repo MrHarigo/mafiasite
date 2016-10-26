@@ -4,8 +4,8 @@ import ru.kpfu.itis.group11501.utkin.Helpers.AddPhoto;
 import ru.kpfu.itis.group11501.utkin.Helpers.TemplateHelper;
 import ru.kpfu.itis.group11501.utkin.Models.Game;
 import ru.kpfu.itis.group11501.utkin.Models.User;
-import ru.kpfu.itis.group11501.utkin.Services.GameServiceImpl;
-import ru.kpfu.itis.group11501.utkin.Services.UserServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.GameServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.UserServiceImpl;
 import ru.kpfu.itis.group11501.utkin.Utils.Token;
 
 import javax.servlet.ServletException;
@@ -50,6 +50,9 @@ public class ServletProfile extends HttpServlet {
 
         User user = (User)request.getSession().getAttribute("current_user");
         ArrayList<Game> games = gameService.findGamesWithUser(user);
+        if (request.getParameter("sort") != null) {
+            games = gameService.sortGames(request.getParameter("sort"),games);
+        }
 
         root.put("user",user);
         root.put("games",games);

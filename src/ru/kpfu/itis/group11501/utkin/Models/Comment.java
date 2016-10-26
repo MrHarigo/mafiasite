@@ -11,6 +11,15 @@ public class Comment {
     private Game game;
     private Topic topic;
 
+    public Comment(int id, User author, Feed feed, String text, Game game, Topic topic) {
+        this.id = id;
+        this.author = author;
+        this.feed = feed;
+        this.text = text;
+        this.game = game;
+        this.topic = topic;
+    }
+
     public Comment(User author, String text, Topic topic) {
         this.author = author;
         this.text = text;

@@ -1,10 +1,8 @@
 package ru.kpfu.itis.group11501.utkin.Helpers;
 
 import ru.kpfu.itis.group11501.utkin.Models.User;
-import ru.kpfu.itis.group11501.utkin.Services.TokenService;
-import ru.kpfu.itis.group11501.utkin.Services.TokenServiceImpl;
-import ru.kpfu.itis.group11501.utkin.Services.UserService;
-import ru.kpfu.itis.group11501.utkin.Services.UserServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.TokenServiceImpl;
+import ru.kpfu.itis.group11501.utkin.Services.Implementations.UserServiceImpl;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;

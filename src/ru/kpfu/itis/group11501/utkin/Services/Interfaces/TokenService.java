@@ -1,4 +1,4 @@
-package ru.kpfu.itis.group11501.utkin.Services;
+package ru.kpfu.itis.group11501.utkin.Services.Interfaces;
 
 /**
  * Created by user on 25.10.2016.

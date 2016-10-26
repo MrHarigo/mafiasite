@@ -1,6 +1,6 @@
 package ru.kpfu.itis.group11501.utkin.Verifiers;
 
-import ru.kpfu.itis.group11501.utkin.Dao.UserDao;
+import ru.kpfu.itis.group11501.utkin.Dao.Interfaces.UserDao;
 import ru.kpfu.itis.group11501.utkin.Models.User;
 
 /**

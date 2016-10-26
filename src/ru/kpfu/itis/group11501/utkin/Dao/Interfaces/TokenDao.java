@@ -1,4 +1,4 @@
-package ru.kpfu.itis.group11501.utkin.Dao;
+package ru.kpfu.itis.group11501.utkin.Dao.Interfaces;
 
 /**
  * Created by user on 21.10.2016.
