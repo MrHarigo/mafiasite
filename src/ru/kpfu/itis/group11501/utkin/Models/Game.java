@@ -2,6 +2,8 @@ package ru.kpfu.itis.group11501.utkin.Models;
 
 import ru.kpfu.itis.group11501.utkin.Services.UserServiceImpl;
 
+import java.sql.Date;
+
 /**
  * Created by user on 18.11.2016.
  */
@@ -17,11 +19,13 @@ public class Game {
     private User player_mafia_2;
     private User player_don;
     private User player_sheriff;
+    private Date date;
+    private String winner_team;
     private UserServiceImpl userService = null;
 
     public Game(int id, User player_civilian_1, User player_civilian_2, User player_civilian_3, User player_civilian_4,
                 User player_civilian_5, User player_civilian_6, User player_mafia_1, User player_mafia_2,
-                User player_don, User player_sheriff) {
+                User player_don, User player_sheriff, Date date, String winner_team) {
 
         this.id = id;
         this.player_civilian_1 = player_civilian_1;
@@ -34,11 +38,13 @@ public class Game {
         this.player_mafia_2 = player_mafia_2;
         this.player_don = player_don;
         this.player_sheriff = player_sheriff;
+        this.date = date;
+        this.winner_team = winner_team;
     }
 
     public Game(int id, String player_civilian_1, String player_civilian_2, String player_civilian_3, String player_civilian_4,
                 String player_civilian_5, String player_civilian_6, String player_mafia_1, String player_mafia_2,
-                String player_don, String player_sheriff) {
+                String player_don, String player_sheriff, Date date, String winner_team) {
         userService = new UserServiceImpl();
 
         this.id = id;
@@ -52,6 +58,8 @@ public class Game {
         this.player_mafia_2 = userService.find(player_mafia_2);
         this.player_don = userService.find(player_don);
         this.player_sheriff = userService.find(player_sheriff);
+        this.date = date;
+        this.winner_team = winner_team;
     }
 
     public Game(int id) {
@@ -144,5 +152,21 @@ public class Game {
 
     public void setPlayer_sheriff(User player_sheriff) {
         this.player_sheriff = player_sheriff;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getWinner_team() {
+        return winner_team;
+    }
+
+    public void setWinner_team(String winner_team) {
+        this.winner_team = winner_team;
     }
 }

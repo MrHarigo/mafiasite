@@ -37,6 +37,7 @@ public class ServletProfile extends HttpServlet {
             User user = (User)request.getSession().getAttribute("current_user");
             userService = new UserServiceImpl();
             userService.setAvatar(image,user);
+            request.getSession().invalidate();
         }
         response.sendRedirect("/profile");
     }

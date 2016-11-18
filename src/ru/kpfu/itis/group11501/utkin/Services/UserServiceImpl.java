@@ -9,6 +9,7 @@ import ru.kpfu.itis.group11501.utkin.Verifiers.UserVerify;
 import ru.kpfu.itis.group11501.utkin.Errors.Error;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by user on 25.10.2016.
@@ -67,6 +68,17 @@ public class UserServiceImpl implements UserService {
             error = new Error("user_not_exists", "This user doesn't exist");
         } else
             userDao.setAvatar(filepath,user);
+    }
+
+    @Override
+    public ArrayList<User> getAllUsers() {
+        error = null;
+        if (userDao.getAllUsers()==null) {
+            error = new Error("users_not_found", "Users are not found");
+            return null;
+        } else {
+            return userDao.getAllUsers();
+        }
     }
 
     public UserDao getUserDao() {

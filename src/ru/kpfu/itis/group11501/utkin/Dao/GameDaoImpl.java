@@ -35,7 +35,7 @@ public class GameDaoImpl implements GameDao {
                 return new Game(resultSet.getInt("id"),resultSet.getString("player_civilian_1"),resultSet.getString("player_civilian_2"),
                         resultSet.getString("player_civilian_3"), resultSet.getString("player_civilian_4"), resultSet.getString("player_civilian_5"),
                         resultSet.getString("player_civilian_6"), resultSet.getString("player_mafia_1"), resultSet.getString("player_mafia_2"),
-                        resultSet.getString("player_don"), resultSet.getString("player_sheriff"));
+                        resultSet.getString("player_don"), resultSet.getString("player_sheriff"), resultSet.getDate("date"), resultSet.getString("winner_team"));
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
@@ -50,8 +50,35 @@ public class GameDaoImpl implements GameDao {
             String request = "SELECT * FROM games WHERE ((player_civilian_1 = ?) or (player_civilian_2 = ?)" +
                     " or (player_civilian_3 = ?) or (player_civilian_4 = ?) or (player_civilian_5 = ?) " +
                     "or (player_civilian_6 = ?) or (player_mafia_1 = ?) or (player_mafia_2 = ?) " +
-                    "or (player_don = ?) or (player_sheriff = ?)) order by games.id desc;";
+                    "or (player_don = ?) or (player_sheriff = ?)) order by games.id desc";
             return selectRequestFindGamesWithUser(request, nickname);
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Game> getAllGames() {
+        if (JDBConnection.getInstance().getConnection()!= null) {
+            String request = "SELECT * FROM games order by games.id desc";
+            return selectRequestGetAllGames(request);
+        }
+        return null;
+    }
+
+    private ArrayList<Game> selectRequestGetAllGames(String request) {
+        try {
+            JDBConnection.statement = JDBConnection.getInstance().getConnection().prepareStatement(request);
+            ResultSet resultSet = JDBConnection.statement.executeQuery();
+            ArrayList<Game> games = new ArrayList<>();
+            while (resultSet.next()) {
+                games.add(new Game(resultSet.getInt("id"),resultSet.getString("player_civilian_1"),resultSet.getString("player_civilian_2"),
+                        resultSet.getString("player_civilian_3"), resultSet.getString("player_civilian_4"), resultSet.getString("player_civilian_5"),
+                        resultSet.getString("player_civilian_6"), resultSet.getString("player_mafia_1"), resultSet.getString("player_mafia_2"),
+                        resultSet.getString("player_don"), resultSet.getString("player_sheriff"), resultSet.getDate("date"), resultSet.getString("winner_team")));
+            }
+            return games;
+        } catch (SQLException sql) {
+            sql.printStackTrace();
         }
         return null;
     }
@@ -76,7 +103,7 @@ public class GameDaoImpl implements GameDao {
                 games.add(new Game(resultSet.getInt("id"),resultSet.getString("player_civilian_1"),resultSet.getString("player_civilian_2"),
                         resultSet.getString("player_civilian_3"), resultSet.getString("player_civilian_4"), resultSet.getString("player_civilian_5"),
                         resultSet.getString("player_civilian_6"), resultSet.getString("player_mafia_1"), resultSet.getString("player_mafia_2"),
-                        resultSet.getString("player_don"), resultSet.getString("player_sheriff")));
+                        resultSet.getString("player_don"), resultSet.getString("player_sheriff"), resultSet.getDate("date"), resultSet.getString("winner_team")));
             }
             return games;
         } catch (SQLException sql) {

@@ -7,9 +7,11 @@ package ru.kpfu.itis.group11501.utkin.Dao;
 import ru.kpfu.itis.group11501.utkin.Models.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface UserDao {
     void addUser(User user) throws SQLException;
     User findUser(String login);
     void setAvatar(String filepath, User user);
+    ArrayList<User> getAllUsers();
 }

@@ -41,6 +41,17 @@ public class GameServiceImpl implements GameService {
         }
     }
 
+    @Override
+    public ArrayList<Game> getAllGames() {
+        error = null;
+        if (gameDao.getAllGames()==null) {
+            error = new Error("games_not_found", "Games are not found!");
+            return null;
+        } else {
+            return gameDao.getAllGames();
+        }
+    }
+
     public GameDaoImpl getGameDao() {
         return gameDao;
     }

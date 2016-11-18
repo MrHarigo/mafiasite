@@ -1,14 +1,12 @@
 package ru.kpfu.itis.group11501.utkin.Servlets;
 
 import ru.kpfu.itis.group11501.utkin.Helpers.TemplateHelper;
-import ru.kpfu.itis.group11501.utkin.Models.Feed;
-import ru.kpfu.itis.group11501.utkin.Services.FeedService;
-import ru.kpfu.itis.group11501.utkin.Services.FeedServiceImpl;
-import ru.kpfu.itis.group11501.utkin.Services.UserService;
+import ru.kpfu.itis.group11501.utkin.Models.Game;
+import ru.kpfu.itis.group11501.utkin.Models.User;
+import ru.kpfu.itis.group11501.utkin.Services.GameServiceImpl;
 import ru.kpfu.itis.group11501.utkin.Services.UserServiceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,25 +16,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by user on 18.10.2016.
+ * Created by user on 18.11.2016.
  */
-@WebServlet(name = "ServletHome")
-public class ServletHome extends HttpServlet {
-    UserService userService;
-    FeedService feedService;
+public class ServletPlayer extends HttpServlet {
+
+    GameServiceImpl gameService;
+    UserServiceImpl userService;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> root = new HashMap<>();
-        feedService = new FeedServiceImpl();
+        gameService = new GameServiceImpl();
         userService = new UserServiceImpl();
+
+        Map<String, Object> root = new HashMap<>();
+
+        String[] strings = request.getRequestURI().split("/");
+        User user = userService.find(strings[strings.length - 1]);
+        ArrayList<Game> games = gameService.findGamesWithUser(user);
+
+        root.put("user",user);
+        root.put("games",games);
         boolean logged = request.getSession().getAttribute("current_user") != null;
-        ArrayList<Feed> feeds = feedService.get3LastFeed();
-        root.put("feeds", feeds);
         root.put("logged", logged);
         response.setContentType("text/html; charset=utf-8");
-        TemplateHelper.render(request, response, "home.ftl",root);
+        TemplateHelper.render(request, response, "player.ftl",root);
     }
 }

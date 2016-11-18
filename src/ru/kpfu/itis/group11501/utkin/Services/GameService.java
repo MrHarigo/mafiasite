@@ -11,4 +11,5 @@ import java.util.ArrayList;
 public interface GameService {
     Game findGame(int id);
     ArrayList<Game> findGamesWithUser(User user);
+    ArrayList<Game> getAllGames();
 }

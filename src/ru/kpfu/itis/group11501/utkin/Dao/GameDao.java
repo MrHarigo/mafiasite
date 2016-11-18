@@ -12,4 +12,5 @@ public interface GameDao {
     void addGame(Game game);
     Game findGame(int id);
     ArrayList<Game> findGamesWithUser(User user);
+    ArrayList<Game> getAllGames();
 }
