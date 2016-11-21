@@ -5,6 +5,7 @@ import ru.kpfu.itis.group11501.utkin.Errors.Error;
 import ru.kpfu.itis.group11501.utkin.Models.Game;
 import ru.kpfu.itis.group11501.utkin.Models.User;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -50,6 +51,16 @@ public class GameServiceImpl implements GameService {
         } else {
             return gameDao.getAllGames();
         }
+    }
+
+    @Override
+    public Game createGame(String player_civilian_1, String player_civilian_2, String player_civilian_3,
+                                String player_civilian_4, String player_civilian_5, String player_civilian_6,
+                                String player_mafia_1, String player_mafia_2, String player_don, String player_sheriff,
+                                Date date, String winner_team) {
+        return  gameDao.createGame(player_civilian_1, player_civilian_2, player_civilian_3, player_civilian_4,
+                player_civilian_5, player_civilian_6, player_mafia_1, player_mafia_2,player_don, player_sheriff,
+                date,winner_team);
     }
 
     public GameDaoImpl getGameDao() {

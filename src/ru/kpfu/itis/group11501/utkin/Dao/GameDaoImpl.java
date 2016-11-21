@@ -4,6 +4,7 @@ import ru.kpfu.itis.group11501.utkin.Configs.JDBConnection;
 import ru.kpfu.itis.group11501.utkin.Models.Game;
 import ru.kpfu.itis.group11501.utkin.Models.User;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,10 +13,7 @@ import java.util.ArrayList;
  * Created by user on 18.11.2016.
  */
 public class GameDaoImpl implements GameDao {
-    @Override
-    public void addGame(Game game) {
 
-    }
 
     @Override
     public Game findGame(int id) {
@@ -61,6 +59,39 @@ public class GameDaoImpl implements GameDao {
         if (JDBConnection.getInstance().getConnection()!= null) {
             String request = "SELECT * FROM games order by games.id desc";
             return selectRequestGetAllGames(request);
+        }
+        return null;
+    }
+
+    @Override
+    public Game createGame(String player_civilian_1, String player_civilian_2, String player_civilian_3,
+                           String player_civilian_4, String player_civilian_5, String player_civilian_6,
+                           String player_mafia_1, String player_mafia_2, String player_don, String player_sheriff,
+                           Date date,String winner_team) {
+        if (JDBConnection.getInstance().getConnection()!= null) {
+            String request = "insert into games (player_civilian_1,player_civilian_2," +
+                    "player_civilian_3,player_civilian_4,player_civilian_5,player_civilian_6," +
+                    "player_mafia_1,player_mafia_2,player_don,player_sheriff,date,winner_team)" +
+                    " values (?,?,?,?,?,?,?,?,?,?,?,?)";
+            try {
+                JDBConnection.statement = JDBConnection.getInstance().getConnection().prepareStatement(request);
+                JDBConnection.statement.setString(1,player_civilian_1);
+                JDBConnection.statement.setString(2,player_civilian_2);
+                JDBConnection.statement.setString(3,player_civilian_3);
+                JDBConnection.statement.setString(4,player_civilian_4);
+                JDBConnection.statement.setString(5,player_civilian_5);
+                JDBConnection.statement.setString(6,player_civilian_6);
+                JDBConnection.statement.setString(7,player_mafia_1);
+                JDBConnection.statement.setString(8,player_mafia_2);
+                JDBConnection.statement.setString(9,player_don);
+                JDBConnection.statement.setString(10,player_sheriff);
+                JDBConnection.statement.setDate(11,date);
+                JDBConnection.statement.setString(12,winner_team);
+                JDBConnection.getInstance().getStatement().executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         }
         return null;
     }

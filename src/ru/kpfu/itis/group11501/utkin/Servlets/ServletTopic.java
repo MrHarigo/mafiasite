@@ -25,7 +25,17 @@ public class ServletTopic extends HttpServlet {
     CommentService commentService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String text = request.getParameter("newComment");
+        User user = (User)request.getSession().getAttribute("current_user");
+        String[] strings = request.getRequestURI().split("/");
+        Topic topic = topicService.findTopic(Integer.parseInt(strings[strings.length - 1]));
+        Comment comment = new Comment(user,text, topic);
+        commentService = new CommentServiceImpl();
+        commentService.addCommentToTopic(comment);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=utf-8");
+        response.sendRedirect(request.getRequestURI());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

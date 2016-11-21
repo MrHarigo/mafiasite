@@ -37,6 +37,7 @@ public class ServletGame extends HttpServlet {
         commentService.addCommentToGame(comment);
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=utf-8");
         response.sendRedirect(request.getRequestURI());
     }
 
@@ -59,6 +60,7 @@ public class ServletGame extends HttpServlet {
         root.put("logged", logged);
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=utf-8");
         TemplateHelper.render(request, response, "game.ftl",root);
 
     }

@@ -23,6 +23,17 @@ public class ServletFeed extends HttpServlet {
     FeedService feedService;
     CommentService commentService;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String text = request.getParameter("newComment");
+        User user = (User)request.getSession().getAttribute("current_user");
+        String[] strings = request.getRequestURI().split("/");
+        Feed feed = feedService.findFeed(Integer.parseInt(strings[strings.length - 1]));
+        Comment comment = new Comment(user,feed,text);
+        commentService = new CommentServiceImpl();
+        commentService.addCommentToFeed(comment);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=utf-8");
+        response.sendRedirect(request.getRequestURI());
 
     }
 
